@@ -1500,7 +1500,7 @@ body > .page-main {
   gap: 4px;
   flex-wrap: nowrap;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: #b692dc transparent;
@@ -1508,14 +1508,13 @@ body > .page-main {
 
 .fotos-hall img {
   display: block;
-  flex: 0 0 auto;
-  width: auto;
+  flex: 0 1 auto;
+  width: min(280px, 100%);
   max-width: none;
   height: 100%;
   max-height: 341px;
   object-fit: contain;
   align-self: flex-start;
-  scroll-snap-align: start;
 }
 
 .fotos-hall:focus-visible {
