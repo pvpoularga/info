@@ -75,7 +75,7 @@ if (modals.length > 0 && modalTriggers.length > 0) {
   });
 }
 
-const tocLinks = document.querySelectorAll('.rules-toc a[href^="#"], .side-menu-children a[href^="#"]');
+const tocLinks = document.querySelectorAll('.rules-toc a[href^="#"]');
 const tocSections = [...tocLinks]
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
@@ -103,35 +103,4 @@ if (tocLinks.length > 0 && tocSections.length > 0 && 'IntersectionObserver' in w
   );
 
   tocSections.forEach((section) => tocObserver.observe(section));
-}
-
-const sideMenuToggle = document.querySelector('.side-menu-toggle');
-const sideMenu = document.querySelector('.side-menu');
-const sideMenuBackdrop = document.querySelector('.side-menu-backdrop');
-const sideMenuLinks = document.querySelectorAll('.side-menu-nav a');
-
-if (sideMenuToggle && sideMenu && sideMenuBackdrop) {
-  const setMenuState = (isOpen) => {
-    sideMenu.classList.toggle('is-open', isOpen);
-    sideMenuBackdrop.classList.toggle('is-visible', isOpen);
-    sideMenuToggle.setAttribute('aria-expanded', String(isOpen));
-    sideMenu.setAttribute('aria-hidden', String(!isOpen));
-    sideMenuToggle.querySelector('.side-menu-icon').textContent = isOpen ? '×' : '☰';
-    document.body.classList.toggle('menu-open', isOpen);
-  };
-
-  setMenuState(false);
-
-  sideMenuToggle.addEventListener('click', () => {
-    setMenuState(!sideMenu.classList.contains('is-open'));
-  });
-
-  sideMenuBackdrop.addEventListener('click', () => setMenuState(false));
-  sideMenuLinks.forEach((link) => link.addEventListener('click', () => setMenuState(false)));
-
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      setMenuState(false);
-    }
-  });
 }
