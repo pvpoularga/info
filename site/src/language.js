@@ -11,6 +11,28 @@
     'ÚLTIMOS VÍDEOS': 'LATEST VIDEOS',
     'ABRIR TIKTOK': 'OPEN TIKTOK',
     'Perguntas Frequentes': 'Frequently Asked Questions',
+    'COMANDOS DO SERVIDOR': 'SERVER COMMANDS',
+    '- Mostra o teu ID único.': '- Shows your unique ID.',
+    '- Abre a lista de jogadores online.': '- Opens the list of online players.',
+    '(mensagem) - Envia um pedido à staff. Só permite um report ativo.': '(message) - Sends a request to staff. Only one active report is allowed.',
+    '- Limpa o teu chat.': '- Clears your chat.',
+    '[ID] [quantidade] - Transfere pontos para outro jogador.': '[ID] [amount] - Transfers points to another player.',
+    '- Revista um jogador morto próximo, fora da safezone.': '- Searches a nearby dead player outside the safe zone.',
+    '- Inicia a reanimação de um membro da tua crew próximo, fora da safezone.': '- Starts reviving a nearby crew member outside the safe zone.',
+    '- Ativa/desativa o spawn dos teus zombies; ao desativar, remove os existentes.': '- Toggles zombie spawning; disabling it removes your existing zombies.',
+    '- Abre o tuning, exige estar dentro de um veículo na safezone.': '- Opens vehicle tuning. You must be inside a vehicle in the safe zone.',
+    '- Abre o menu de peds.': '- Opens the ped menu.',
+    '- Liga/desliga a otimização gráfica.': '- Toggles graphics optimization.',
+    'TECLAS DEFAULT': 'DEFAULT KEY BINDINGS',
+    'T - Abre o chat.': 'T - Opens the chat.',
+    'L - Mostra/esconde o chat.': 'L - Shows/hides the chat.',
+    'TAB - Abre/fecha o inventário.': 'TAB - Opens/closes the inventory.',
+    'H - Desiste no ecrã de morte, perdendo o loot.': 'H - Gives up on the death screen, losing your loot.',
+    'Z - Marca o ponto para onde estás a apontar, visível para membros da mesma crew.': 'Z - Marks the spot you are aiming at, visible to members of your crew.',
+    'K - Guarda o veículo que atual.': 'K - Stores your current vehicle.',
+    'Como crio binds?': 'How do I create key bindings?',
+    '- Cria um bind para o comando desejado, substituindo "key" pela tecla e "command" pelo comando.': '- Creates a key binding for the desired command. Replace "key" with the key and "command" with the command.',
+    'Exemplo:': 'Example:',
     'Encontra aqui as respostas às dúvidas mais comuns sobre o servidor.': 'Find answers to the most common questions about the server here.',
     'Como entro no servidor?': 'How do I join the server?',
     'Entra no nosso Discord para obteres todas as informações e novidades.': 'Join our Discord for all the information and latest news.',
@@ -46,6 +68,7 @@
     'Dúvidas?': 'Questions?',
     'Se tiveres alguma dúvida sobre estas regras, contacta a staff através do nosso Discord.': 'If you have any questions about these rules, contact our staff through our Discord.',
     'Acesso rápido': 'Quick links',
+    'Fotos do Hall of Fame — desliza para ver mais': 'Hall of Fame photos — scroll to see more',
     'Destaques PVP OU LARGA': 'PVP OU LARGA highlights',
     'Visita o TikTok PVP OU LARGA': 'Visit PVP OU LARGA on TikTok',
     'Abrir TikTok PVP OU LARGA': 'Open PVP OU LARGA on TikTok',
@@ -64,7 +87,7 @@
     const node = walker.currentNode;
     if (node.parentElement.closest('script, style, .tiktok-embed')) continue;
     const english = translations[normalize(node.nodeValue)];
-    if (english) entries.push({ node, original: node.nodeValue, english });
+    if (english) entries.push({ node, original: node.nodeValue, english: node.nodeValue.replace(/\S[\s\S]*\S|\S/, english) });
   }
   document.querySelectorAll('[alt], [aria-label], [title], meta[name="description"]').forEach((node) => {
     for (const attribute of ['alt', 'aria-label', 'title', 'content']) {

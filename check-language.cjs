@@ -19,12 +19,19 @@ const path = require('path');
  if(!await page.getByText('● Impersonating staff members is prohibited.',{exact:false}).count()) throw Error('Rule untranslated');
  await page.goto(root+'/FAQ/');
  if(!await page.getByText('Frequently Asked Questions',{exact:true}).count()) throw Error('Persistence failed');
+ const faqText = await page.locator('main').innerText();
+ for (const text of ['SERVER COMMANDS', 'DEFAULT KEY BINDINGS', 'How do I create key bindings?', 'Shows your unique ID.', '[ID] [amount]', 'K - Stores your current vehicle.', 'Example:']) {
+   if(!faqText.includes(text)) throw Error('FAQ translation missing: '+text);
+ }
+ if(!faqText.includes('/id - Shows your unique ID.')) throw Error('Command spacing lost');
+ if(await page.locator('code').nth(1).textContent()!=='bind keyboard "F5" "revistar"') throw Error('Command example changed');
  await page.click('#language-toggle');
  if(!await page.getByText('Perguntas Frequentes',{exact:true}).count()) throw Error('Portuguese restore failed');
+ if(!await page.getByText('COMANDOS DO SERVIDOR',{exact:true}).count()) throw Error('Portuguese commands restore failed');
  await page.goto(root+'/home/');
  await page.click('#language-toggle');
- if(!await page.getByText('COMMUNITY',{exact:true}).count()) throw Error('Home untranslated');
- await page.screenshot({path:'language-preview.png',fullPage:false});
+ if(!await page.getByText('WELCOME TO THE OFFICIAL WEBSITE',{exact:true}).count()) throw Error('Home untranslated');
+ if(await page.locator('.fotos-hall').getAttribute('aria-label')!=='Hall of Fame photos — scroll to see more') throw Error('Gallery label untranslated');
  if(errors.length) throw Error(errors.join('\n'));
  console.log('PASS: PT/EN switching, Rules/Home/FAQ translation, persistence, Portuguese restoration; no script errors.');
  } finally {if(browser) await browser.close();server.close();}
